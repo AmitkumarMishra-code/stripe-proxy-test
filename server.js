@@ -9,14 +9,9 @@ const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
 
 const app = express();
-const port = 3000; //add your port here
 
 //Confirm the API version from your stripe dashboard
 const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
-
-app.listen(port, () => {
-  console.log(`Example app listening at ${port}`);
-});
 
 app.post("/create-payment-intent", async (req, res) => {
   try {
@@ -36,3 +31,14 @@ app.post("/create-payment-intent", async (req, res) => {
     res.json({ error: e.message });
   }
 });
+
+app.all(/.*/, (req, res) => {
+  res.statusCode = (404)
+  res.send('Invalid Endpoint.')
+})
+
+
+const PORT = process.env.PORT || 4000
+app.listen(PORT, () => {
+    console.log(`Server is listening at port number : ${PORT}`);
+})
