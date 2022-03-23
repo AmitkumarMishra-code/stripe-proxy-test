@@ -1,0 +1,17 @@
+{
+  "name": "stripeserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "stripe": "*",
+    "dotenv": "*",
+    "nodemon":"2.0.15"
+  },
+  "author": "Amit",
+  "license": "ISC"
+}
