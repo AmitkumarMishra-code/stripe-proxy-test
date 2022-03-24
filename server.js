@@ -22,6 +22,16 @@ app.post("/create-payment-intent", async (req, res) => {
       currency: "usd",
       payment_method_types: ['card'], //by default
       description: 'Software development services',
+      shipping: {
+        name: 'Jenny Rosen',
+        address: {
+          line1: '510 Townsend St',
+          postal_code: '98140',
+          city: 'San Francisco',
+          state: 'CA',
+          country: 'US',
+        },
+      },
     });
 
     const clientSecret = paymentIntent.client_secret;
