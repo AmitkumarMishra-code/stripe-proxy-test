@@ -14,6 +14,7 @@ const app = express();
 const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
 
 app.post("/create-payment-intent", async (req, res) => {
+  console.log(req.body)
   const {paymentMethodType, currency} = req.body;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
