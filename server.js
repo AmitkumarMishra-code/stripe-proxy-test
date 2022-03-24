@@ -21,6 +21,7 @@ app.post("/create-payment-intent", async (req, res) => {
       amount: 1099, //lowest denomination of particular currency
       currency: "usd",
       payment_method_types: ['card'], //by default
+      description: 'Software development services',
     });
 
     const clientSecret = paymentIntent.client_secret;
