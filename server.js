@@ -14,11 +14,12 @@ const app = express();
 const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
 
 app.post("/create-payment-intent", async (req, res) => {
+  const {paymentMethodType, currency} = req.body;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 1099, //lowest denomination of particular currency
-      currency: "inr",
-      payment_method_types: ["card"], //by default
+      currency: currency,
+      payment_method_types: [paymentMethodType], //by default
     });
 
     const clientSecret = paymentIntent.client_secret;
