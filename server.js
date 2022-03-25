@@ -13,8 +13,14 @@ const app = express();
 //Confirm the API version from your stripe dashboard
 const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
 
+app.post("/random", async(req, res) => {
+  console.log(req.body)
+  res.statusCode(200)
+  res.json({message: "Success"})
+})
+
 app.post("/create-payment-intent", async (req, res) => {
-  console.log("request body: ", JSON.parse(req.body))
+  console.log("request body: ", req.body)
   // const {paymentMethodType, currency} = req.body;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
