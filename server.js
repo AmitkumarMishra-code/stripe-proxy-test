@@ -9,6 +9,7 @@ const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
 
 const app = express();
+app.use(express.json())
 
 //Confirm the API version from your stripe dashboard
 const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
