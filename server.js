@@ -15,7 +15,7 @@ const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
 
 app.post("/random", async(req, res) => {
   console.log(req.body)
-  res.statusCode(200)
+  res.statusCode = (200)
   res.json({message: "Success"})
 })
 
