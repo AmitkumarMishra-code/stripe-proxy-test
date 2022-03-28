@@ -5,7 +5,6 @@ const Stripe = require("stripe");
 
 const stripePublishableKey = process.env.STRIPE_PUBLISHABLE_KEY || "";
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY || "";
-const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
 
 const app = express();
@@ -14,10 +13,15 @@ app.use(express.json())
 //Confirm the API version from your stripe dashboard
 const stripe = Stripe(stripeSecretKey, { apiVersion: "2020-08-27" });
 
-app.post("/random", async(req, res) => {
-  console.log(req.body)
-  res.statusCode = (200)
-  res.json({message: "Success"})
+app.post("/get-publishable-key", async(req, res) => {
+  if(stripePublishableKey.length){
+    res.statusCode = (200)
+    res.json({publishableKeyFromServer: stripePublishableKey})
+  }
+  else{
+    res.statusCode = (503)
+    res.json({error: "Publishable key not available!"})
+  }
 })
 
 app.post("/create-payment-intent", async (req, res) => {
