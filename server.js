@@ -25,13 +25,12 @@ app.get("/get-publishable-key", async(req, res) => {
 })
 
 app.post("/create-payment-intent", async (req, res) => {
-  console.log("request body: ", req.body)
-  // const {paymentMethodType, currency} = req.body;
+  const {paymentMethodType, currency, amount} = req.body;
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1099, //lowest denomination of particular currency
-      currency: "usd",
-      payment_method_types: ['card'], //by default
+      amount: Number(amount) * 100, //lowest denomination of particular currency
+      currency: currency,
+      payment_method_types: [paymentMethodType], //by default
       description: 'Software development services',
       shipping: {
         name: 'Jenny Rosen',
